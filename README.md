@@ -1,21 +1,29 @@
-## The challenge
 
-The idea is simple: create a *web crawler* from ground up, using any language you are confortable with.
+# NodeJS Route Calculator 
+Simple application to calculate the shortest route between 2D array nodes.
+Online demo: http://35.237.207.113:3000/
 
-## Suggested workflow
+## Instalation
+Run on git bash
+```bash
+    git clone https://github.com/minasvisual/backend-challenge
+	cd backend-challenge
+	npm install
+```
+## Run as web application
+Run on git bash
+```bash
+    node index
+```
+Application will be available on browser url http://localhost:3000
 
-This crawler should only navigate in one domain, for example: pointing it to https://elixir-lang.org, it should walk for all pages on the domaing, but it shouldn`t go to Twitter, or the Language Forum.
+## Run as CLI application
+Run on git bash
+```bash
+    node cli "[[1,1,1,1],[0,1,1,0],[0,1,0,1],[0,1,9,1],[1,1,1,1]]"
+```
+Application receive an array as json string to be calculate the shortest route. 
 
-Your crawler must print, as a result, a map, with a list of all the pages, and all the static assets (css, js, img) of every page. 
-
-You can choose how the result is gonna look like.
-
-You get extra points for a faster crawler.
-
-Fork this repo and send it back to us with your implementation.
-
-## Bonus
-
-You need to provide instructions on buildin and running your code.
-
-**Have fun building!** 🚀
+Libs used:
+- [express](https://expressjs.com/pt-br/ "express") 
+- [node djikstra](https://github.com/albertorestifo/node-dijkstra "node djikstra")
