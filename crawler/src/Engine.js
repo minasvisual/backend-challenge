@@ -48,13 +48,13 @@ module.exports = () =>
     let validadeAsset = (accept, arrData) => {
       let ext;
       return Array.isArray(arrData) && arrData.filter( t => {
-         ext = _.get( t.match(/\.[0-9a-z]+$/i), '[0]', '').replace('.', '')
+         ext = _.get( t.href.match(/\.[0-9a-z]+$/i), '[0]', '').replace('.', '')
          return accept.indexOf(ext.toLowerCase()) > -1
       })
     }
     
     let validatePage = (pageArr) => {
-        return pageArr.filter( p => new RegExp(/^(?:[a-z]+:)?\/\//i).test(p) === false && pagesList.indexOf(p) === -1 )
+        return pageArr.filter( p => new RegExp(/^(?:[a-z]+:)?\/\//i).test(p.href) === false && pagesList.indexOf(p.href) === -1 )
     }
    
     let getPageAssets = ({data, response}) => {
