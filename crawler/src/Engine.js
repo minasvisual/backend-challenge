@@ -3,7 +3,8 @@ const _ = require('lodash')
 
 module.exports = () => 
 {
-    let pagesList = [],
+    let baseDomain = '',
+        pagesList = [],
         pagesTree = {},
         validationTypes = {
           urls:[],
@@ -77,11 +78,13 @@ module.exports = () =>
                      return data;
                  })
                  .then( getPageAssets )
-                 .then( (x) => console.log( x, pagesList ) )
     }
    
     let getPages = (mainUrl) => {
-       getPageData(mainUrl, schema)
+       baseDomain = _.get( mainUrl.match(/^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/\n]+)/im) ,'[0]' )
+       getPageData(mainUrl, schema, (data) => {
+           console.log(pagesTree)
+       })
     }
     
     return {
