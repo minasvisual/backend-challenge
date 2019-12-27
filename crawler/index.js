@@ -4,7 +4,7 @@ var app = express();
 
 const routes = require('./src/Routes')()
 
-// global.BASEURL = __dirname;
+global.BASEURL = __dirname;
 // app.use(bodyParser.json())
 // app.use(express.static( __dirname+'/public'));
 // app.use(routes);
