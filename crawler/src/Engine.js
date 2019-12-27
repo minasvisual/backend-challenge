@@ -1,5 +1,6 @@
 const scrapeIt = require("scrape-it")
 const _ = require('lodash')
+const Url = require('url');
 
 module.exports = () => 
 {
@@ -60,11 +61,16 @@ module.exports = () =>
     }
    
     let getPageAssets = ({data, response}) => {
-        pagesTree[ _.get(response, 'responseUrl') ] = {
+        let url = Url.resolve(_.get(response, 'responseUrl', ''), baseDomain)
+        let pathUrl = url.replace(baseDomain, '')
+      
+        pagesTree[ url ] = {
            css: validadeAsset(['css'], data.css),
            js: validadeAsset(['js'], data.js),
            images: validadeAsset(['jpg','gif','svg','png','bitmap','canvas'], data.images),
         }
+        
+        if( pagesList.indexOf( pathUrl ) > -1 ) pagesList.splice( pagesList.indexOf( pathUrl ), 1 )
       
         return pagesTree
     }
@@ -73,7 +79,6 @@ module.exports = () =>
         // Promise interface
         return scrapeIt(url, objSchema)
                  .then((data) =>{
-                     console.log(data.data)
                      validatePage( data.data.urls )
                      return data;
                  })
@@ -81,10 +86,15 @@ module.exports = () =>
     }
    
     let getPages = (mainUrl) => {
+       let count = 0
        baseDomain = _.get( mainUrl.match(/^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/\n]+)/im) ,'[0]' )
-       getPageData(mainUrl, schema, (data) => {
-           console.log(pagesTree)
-       })
+       getPageData(mainUrl, schema)
+         .then((data) => {
+              if( pagesList.length > 0 && count < 1){
+                pagesList.map( x => getPageData(x, schema) )
+                count++
+              }
+         })
     }
     
     return {
