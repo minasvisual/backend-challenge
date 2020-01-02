@@ -1,13 +1,13 @@
 
-# NodeJS Route Calculator 
-Simple application to calculate the shortest route between 2D array nodes.
+# NodeJS Assets Discover
+Simple application to discover html assets recursively.
 Online demo: http://35.237.207.113:3000/
 
 ## Instalation
 Run on git bash
 ```bash
     git clone https://github.com/minasvisual/backend-challenge
-	cd backend-challenge
+	cd backend-challenge/crawler
 	npm install
 ```
 ## Run as web application
@@ -16,6 +16,13 @@ Run on git bash
     node index
 ```
 Application will be available on browser url http://localhost:3000
+
+Run by HTTP call
+POST /api/get-assets
+Body:
+```json
+    { "url": "https://elixir-lang.org/" } 
+```
 
 ## Run as CLI application
 Run on git bash
