@@ -20,10 +20,10 @@ Application will be available on browser url http://localhost:3000
 ## Run as CLI application
 Run on git bash
 ```bash
-    node cli "[[1,1,1,1],[0,1,1,0],[0,1,0,1],[0,1,9,1],[1,1,1,1]]"
+    node cli "https://elixir-lang.org/"
 ```
-Application receive an array as json string to be calculate the shortest route. 
+Application receive an url string to discover all assets. 
 
 Libs used:
 - [express](https://expressjs.com/pt-br/ "express") 
-- [node djikstra](https://github.com/albertorestifo/node-dijkstra "node djikstra")
+- [node scrapeit](https://github.com/IonicaBizau/scrape-it "node scrapeit")
