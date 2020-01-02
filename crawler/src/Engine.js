@@ -103,7 +103,7 @@ module.exports = () =>
             processing = true;
             let promises = _.difference(pagesList, Object.keys(pagesTree))
                               .map( x =>  getPageData( Url.resolve(baseDomain, x), schema) )
-            Promise.all(promises)
+            return Promise.all(promises)
                 .then((data) =>{ 
                     processing = false
                     count++
@@ -120,6 +120,7 @@ module.exports = () =>
                   console.log("The file was saved!");
               }); 
               console.log("finished")
+              return Promise.resolve(pagesTree)
           }
      }
    
@@ -127,7 +128,7 @@ module.exports = () =>
     let getPages = (mainUrl, cb) => {
        baseDomain = _.get( mainUrl.match(/^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/\n]+)/im) ,'[0]' )
       
-       getPageData(mainUrl, schema).then(callback)
+       return getPageData(mainUrl, schema).then(callback)
     }
     
     return {
